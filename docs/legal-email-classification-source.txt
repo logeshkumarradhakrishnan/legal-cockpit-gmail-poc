@@ -1,0 +1,509 @@
+Legal Email Classification
+1.	Purpose
+This document lists the keyword sets and classification intent used to automatically sort incoming Outlook emails into aviation-related legal case categories. Emails matching personal-matter keywords (e.g. the user's home loan) are excluded from classification entirely and never filed as legal cases.
+2. Classification Logic Summary
+1.	Fetch email (subject, sender, date, body, attachment) from Outlook.
+2.	Check against the Personal Exclusion list - if matched, discard and do not classify.
+3.	AI based categorization based on keyword and intent - assign the category based on best fit.
+4.	Log the result (category + classification method) to the output file for review.
+5.	The agent runs once every three days to automatically classify incoming emails and identify/filter emails relevant to Legal.
+Legal Cockpit - Open Items Tracker
+			
+#	Category	Open Point	Remarks
+1	Success Metrics	Define KPIs/success metrics (e.g., Current number of compliance misses, % reduction in compliance misses, current number of deadline misses, % reduction in missed deadlines, response-time improvement, coverage %, number of days delay in getting information, baseline and post tool, )	Samples emails can be collected to study the overall timeline 
+
+
+2	Success Metrics	Current baseline avg. time to respond to a legal communication - no existing measurement exists today	 
+3	Success Metrics	Target avg. time to respond to legal communication, post-tool	 
+4	Scope & Volume	Expected volume of legal/regulatory emails per week/month, needed for capacity planning	 Avg of email volume to be taken
+5	Scope & Volume	Historical email volume and current location (mailbox archives, PST files, etc.) for the model training exercise	 
+6	Scope & Volume	Users in scope – Internal (Name of Department and SPOC)	 
+7	Classification & Risk Logic	Risk scorecard inputs/weights/Classification	 
+8	Classification & Risk Logic	Legal keywords, phrases, sample communications, and misclassification examples	 
+9	Matter Handling Rules	How response deadlines are determined - extracted from notice text vs. manually assigned by legal team	 Any logic for internal deadline
+10	Matter Handling Rules	High volume/frequency mails are currently distributed
+(80-20 rule (same sender, Authority/ same regulator / same issue category type /department/ combination)	 Prioritize development of high-volume frequency 
+11	Matter Handling Rules	Owner-assignment logic - automatic by subject/department vs. manual triage assignment	 
+12	Roles & Permissions	Exact permissions per role - reviewer vs. approver vs. dashboard admin- to be defined	 
+13	Roles & Permissions	Whether all Legal team members get equal dashboard access, or role-based permissions are needed	 
+14	Reporting	Full KPI list for the dashboard	 
+15	Data, Privacy & Security	Data classification/labeling policy alignment (Microsoft Purview)	 
+16	Rollout & Timeline	Leadership communication / sensitization mail draft	 
+17	Stakeholder Registry & Keywords	Ownership/update cadence for keeping the registry and keyword list current over time	 
+18	Data, Privacy & Security	Legal hold / retention period for stored artifacts	 
+19	Classification & Risk Logic	Historical email review and risk classification metrics	 
+
+3. Classification Summary and Other Keywords Consideration
+If you're identifying legal/compliance-related emails, you can use a combination of keywords, phrases, and classifiers to categorize messages into legal risk areas.
+
+1. Contract & Agreement Related
+Keywords
+•	Contract
+•	Agreement
+•	MSA (Master Service Agreement)
+•	SOW (Statement of Work)
+•	Amendment
+•	Addendum
+•	Legal review
+•	Terms and Conditions
+•	NDA
+•	Non-Disclosure Agreement
+•	Vendor agreement
+•	Partnership agreement
+•	Procurement contract
+•	Renewal
+•	Execution copy
+•	Signature required
+•	Breach of contract
+•	Termination notice
+•	Default notice
+•	Indemnity claim
+•	Force majeure
+•	SLA breach
+•	Liquidated damages
+•	Bank guarantee
+•	Encashment
+•	Invoke the guarantee
+•	Performance guarantee
+•	Blacklist
+•	Debarment
+•	Vendor default
+•	Non-performance
+•	Deficiency in service
+•	Contract expiry
+•	Breach notice
+•	Rectify within
+•	Termination for cause
+•	Termination for convenience
+•	Dispute resolution clause
+•	Escalation matrix (contractual sense)
+
+Classifier: Contract Management, Legal Review Required
+
+2. Litigation & Disputes
+Keywords
+•	Lawsuit
+•	Litigation
+•	Legal notice
+•	Court order
+•	Dispute
+•	Arbitration
+•	Settlement
+•	Claim
+•	Damages
+•	Indemnification
+•	Breach
+•	Notice of default
+•	Subpoena
+•	Hearing
+•	Notice under section
+•	Summons
+•	Hereby served
+•	Without prejudice
+•	Cause of action
+•	Suit filed
+•	Plaint
+•	Written statement
+•	Arbitral tribunal
+•	Injunction
+•	Stay order
+•	Writ petition
+•	Public interest litigation
+•	PIL
+•	Advocate
+•	On behalf of our client
+•	Learned counsel
+•	Hon'ble court
+•	Hon'ble tribunal
+•	Case no.
+•	Petition no.
+•	Order dated
+•	Next date of hearing
+•	Listed for hearing
+
+Classifier: Litigation, High Legal Risk
+
+3. Regulatory & Compliance
+Keywords
+•	Compliance
+•	Regulatory
+•	Audit
+•	Policy violation
+•	SOX
+•	GDPR
+•	DPDPA
+•	HIPAA
+•	PCI-DSS
+•	ISO 27001
+•	Investigation
+•	Non-compliance
+•	Compliance review
+•	Risk assessment
+•	Circular no.
+•	CAR (Civil Aviation Requirement)
+•	Advisory no.
+•	Compliance report
+•	Statutory compliance
+•	Mandatory compliance
+•	In exercise of powers conferred
+•	Notification no.
+•	Gazette notification
+•	Amendment to
+•	Regulation
+•	Guideline
+•	Directive
+•	F.No. (government file number format)
+•	Show cause
+•	Why action should not be taken
+•	Explain within
+•	Penalty
+•	Fine imposed
+•	Violation of
+•	Warning notice
+•	Cease and desist
+•	Punitive action
+•	Suspension of license
+•	Revocation
+•	Draft regulation
+•	Invites comments
+•	Public consultation
+•	Stakeholder consultation
+•	Comments are invited on
+Classifier: Compliance & Regulatory
+
+4. Intellectual Property (IP)
+Keywords
+•	Patent
+•	Trademark
+•	Copyright
+•	Intellectual Property
+•	IP infringement
+•	Licensing
+•	Trade secret
+•	Proprietary information
+•	Source code ownership
+Classifier: Intellectual Property
+
+5. Employment & HR Legal
+Keywords
+•	Termination
+•	Disciplinary action
+•	Grievance
+•	Harassment complaint
+•	Workplace investigation
+•	Labor law
+•	Employment contract
+•	Severance
+•	Whistleblower
+•	Equal opportunity
+Classifier: Employment Legal
+
+6. Data Privacy & Confidentiality
+Keywords
+•	Personal Data
+•	PII
+•	Sensitive Personal Information
+•	Data Breach
+•	Privacy Notice
+•	Consent
+•	Confidential
+•	Restricted
+•	Internal Only
+•	Data Protection
+•	Data Subject Request
+Classifier: Privacy & Data Protection
+
+7. Mergers, Acquisitions & Corporate
+Keywords
+•	Merger
+•	Acquisition
+•	Due Diligence
+•	Shareholder
+•	Board Resolution
+•	Corporate Governance
+•	Investment
+•	Joint Venture
+•	Transaction
+Classifier: Corporate Legal
+
+8. External Counsel Interaction
+Keywords
+•	Attorney
+•	Counsel
+•	Law firm
+•	Advocate
+•	Privileged
+•	Attorney-client privilege
+•	Legal opinion
+•	Outside counsel
+Classifier: Attorney-Client Privileged
+9. Tax & Government Demands
+Keywords
+●	Assessment order
+●	Demand notice
+●	Tax notice
+●	GST notice
+●	Income tax
+●	TDS
+●	Show cause under section
+●	Recovery notice
+●	Attachment notice
+●	Intimation under section
+Classifier: Tax & Statutory Demand
+10. Licenses, Permits & Clearances
+Keywords
+●	License renewal
+●	Permit expiry
+●	NOC
+●	No objection certificate
+●	Certificate of registration
+●	Authorization
+●	Registration renewal
+●	Clearance
+●	Consent to operate
+●	Consent to establish
+Classifier: Licensing & Regulatory Clearance
+11. RTI (Right to Information)
+Keywords
+●	Right to information
+●	RTI application
+●	Information sought under
+●	Section 6(1)
+●	Section 7
+Classifier: RTI / Statutory Disclosure
+12. Environmental
+Keywords
+●	Environmental clearance
+●	EIA
+●	Pollution control
+●	Green tribunal
+●	NGT
+●	Emission
+●	Effluent
+Classifier: Environmental Compliance
+13. Land & Property
+Keywords
+●	Land acquisition
+●	Encroachment
+●	Lease deed
+●	Eviction
+●	Property dispute
+●	Khata
+●	Revenue records
+●	Mutation
+Classifier: Land & Property Legal
+14. International Agency Correspondence
+Keywords
+●	ICAO
+●	IATA
+●	IOSA
+●	USOAP
+●	Annex 17
+●	Annex 19
+●	State Letter
+●	ACI
+●	ACI Asia-Pacific
+●	SARPs
+●	Standard and recommended practice
+●	International obligation
+●	Bilateral air services agreement
+●	IATA Clearing House
+●	IATA dispute
+●	WHO
+●	International Health Regulations
+●	Corrective action plan
+●	Audit finding
+Classifier: International Aviation & Regulatory
+15. Media Interaction
+Keywords
+●	Seeking your response
+●	For publication
+●	Going to press
+●	Responding by [time reference]
+●	Deadline for comment
+●	Right to reply
+●	On the record
+●	Off the record
+●	Investigative story
+●	Sources indicate
+●	Allegations against
+●	Defamatory
+●	Retraction
+●	Demand a correction
+●	Sub judice
+●	Press statement required
+●	Media query
+●	Journalist
+●	Exclusive story
+Classifier: Media & Reputational Risk
+16. Passenger Complaints & Escalations
+Keywords
+Injury / Medical Harm
+●	Injured
+●	Injury
+●	Fell
+●	Slipped
+●	Fracture
+●	Hospitalized
+●	Medical negligence
+●	Wheelchair accident
+●	Escalator accident
+●	Allergic reaction
+●	Died
+●	Death
+●	Medical emergency not attended
+Discrimination / Accessibility
+●	Disability
+●	Discriminat[ion/ory]
+●	Denied boarding due to
+●	Refused wheelchair
+●	RPwD Act
+●	Rights of persons with disabilities
+●	Reduced mobility
+●	Denied assistance
+●	Humiliat[ed/ing]
+●	Racial
+●	Religious
+●	Gender-based
+Explicit Legal Threat
+●	Legal action
+●	Will sue
+●	Consumer court
+●	Consumer forum
+●	File a case
+●	Lawyer
+●	Advocate
+●	Compensation claim
+●	RTI
+●	Defamation
+●	Human rights commission
+●	National commission
+●	District commission
+High-Value / High-Visibility Claims
+●	Lost baggage worth
+●	Stolen from checked baggage
+●	Denied boarding compensation
+●	Flight cancellation compensation
+●	Theft
+●	Security lapse
+●	Data breach
+●	Privacy violation
+●	CCTV footage request
+Media / Escalation Signals
+●	Posted on twitter
+●	Viral
+●	Media
+●	Press
+●	Journalist
+●	Going public
+●	Social media (co-occurring with a complaint)
+Classifier: Passenger Legal Risk
+17. Urgency & Escalation Modifiers
+Keywords
+●	Urgent
+●	Immediate action required
+●	Within 7 days
+●	Within 15 days
+●	Within 30 days
+●	Final notice
+●	Last opportunity
+●	Reminder
+●	Failure to respond
+Classifier: N/A — Priority Booster
+Applied alongside any category above; boosts score when co-occurring with other matched keywords.
+18. Negative / Exclusion Keywords
+Keywords
+●	Webinar
+●	Training program
+●	Newsletter
+●	Unsubscribe
+●	Save the date
+●	Conference invitation
+●	Certificate of appreciation
+Classifier: N/A — Exclusion List
+Suppresses classification even if other keywords match, to reduce false positives.
+
+4. Excluded: Personal Matters (Not Classified)
+Intent: Prevent personal, non-business correspondence from being pulled into the legal case pipeline. Any email containing one of these terms is skipped and excluded from all downstream classification.
+home loan	mortgage
+refinance	personal loan
+my mortgage	loan officer
+escrow account	personal tax return
+personal taxes	1040
+irs personal	family matter
+personal banking	credit card statement
+personal insurance policy	life insurance quote
+car loan	auto loan
+personal injury (self)	POSH – related 
+
+
+
+
+
+5. External Stakeholder Registry 
+A maintained, structured registry (domain/email → stakeholder name → category → typical nature of correspondence) forms the backbone of Signal Layer 1. Seeded at build time and kept current by the Legal team. 
+Email domains for each of these + any additional stakeholders need to be collected basis discussions with GM+ 
+A. Aviation Sector Regulators (Domestic) 
+•	DGCA (Directorate General of Civil Aviation) - CARs, airworthiness, licensing, safety circulars 
+•	BCAS (Bureau of Civil Aviation Security) - security compliance, AVSEC circulars, security audits 
+•	AAI (Airports Authority of India) - ATC coordination, navigation services, land/lease matters 
+•	AERA (Airports Economic Regulatory Authority) - tariff orders, consultation papers, economic regulation 
+•	TDSAT
+•	Ministry of Civil Aviation (MoCA) - policy directives 
+•	Airport Health Organization (APHO) - public health/quarantine notices 
+B. International Aviation & Regulatory Agencies 
+•	ICAO (International Civil Aviation Organization) - State Letters, SARPs (Standards and Recommended Practices) notifications, USOAP audit correspondence, safety directives 
+•	IATA (International Air Transport Association) - IOSA audit findings, operational/commercial standards, IATA Clearing House matters, dispute correspondence 
+•	ACI (Airports Council International) / ACI Asia-Pacific - accreditation, benchmarking, advisory correspondence 
+•	WHO (World Health Organization) - International Health Regulations (IHR), public health emergency notifications 
+•	WCO (World Customs Organization) - international customs standards correspondence, where applicable 
+•	Foreign civil aviation authorities / bilateral air services correspondence - where a matter involves a foreign state or carrier 
+C. Central Government / Statutory Bodies 
+•	Customs Department (Bengaluru Customs) - cargo, international passenger operations 
+•	Bureau of Immigration (BOI) / FRRO 
+•	Income Tax Department - assessment orders, demand notices, TDS matters 
+•	CBIC / GST authorities (central and state) 
+•	Ministry of Corporate Affairs (MCA) / Registrar of Companies (ROC) 
+•	Competition Commission of India (CCI) 
+•	Directorate of Revenue Intelligence (DRI) 
+•	PESO (Petroleum and Explosives Safety Organisation) - fuel farm compliance 
+•	FSSAI - food safety at airport F&B outlets 
+•	Legal Metrology Department - weights & measures (retail, fuel dispensing) 
+•	Ministry of Environment, Forest and Climate Change (MoEFCC) - environmental clearances 
+•	National Green Tribunal (NGT) 
+D. State / Local Government Bodies (Karnataka-specific) 
+•	Karnataka State Pollution Control Board (KSPCB) 
+•	Karnataka Industrial Areas Development Board (KIADB) - land acquisition/allotment matters 
+•	BESCOM (electricity) 
+•	Devanahalli Town Municipal Council / Gram Panchayat (local municipal authority) 
+•	Deputy Commissioner, Bengaluru Rural District - revenue/land records 
+•	Karnataka State Fire and Emergency Services - Fire NOC 
+•	Karnataka Labour Department / Chief Labour Commissioner 
+•	Karnataka State Human Rights Commission 
+E. Judicial / Quasi-Judicial Bodies 
+•	High Court of Karnataka, District Courts, Consumer Courts 
+•	NCLT (if corporate matters arise) 
+•	Labour Courts / Industrial Tribunals 
+•	Arbitral Tribunals / Arbitration Institutions 
+•	e-Courts system (ecourts.gov.in) - case status, hearing notices 
+F. Law Firms / External Counsel 
+•	Both BIAL’s retained counsel and opposing counsel - maintained as a curated domain list. Opposing-counsel emails are treated as highest priority, since they typically signal active or threatened litigation. 
+G. Contractual / Commercial Counterparties (Vendors) 
+•	Airlines (contractual notices, SLA breach claims) 
+•	Ground handling agencies 
+•	Retail/F&B concessionaires 
+•	Cargo operators 
+•	Into-plane fuel suppliers 
+•	Construction/O&M contractors and vendors 
+•	Insurance companies/surveyors (claims correspondence) 
+H. Passengers / General Public 
+•	Direct passenger complaints escalated to a GM+ mailbox (email, or forwarded from a web-form submission) 
+•	Complaints escalated internally from the Customer Experience / Guest Relations team 
+•	Complaints escalated from the Chairman’s / MD’s office 
+•	Complaints forwarded from the social media / PR team 
+•	Consumer forum notices (District/State/National Consumer Disputes Redressal Commission) - treated as a formal legal proceeding, not a complaint 
+•	Disability rights / advocacy organizations writing on a passenger’s behalf 
+I. Media 
+•	Journalists and media houses - direct queries or forwarded from Corporate Communications/PR 
+•	Media house legal/compliance teams (treated as external counsel correspondence) 
+

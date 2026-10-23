@@ -1,0 +1,5 @@
+[
+  { "email": "general.counsel@contoso.com", "name": "General Counsel", "role": "super_admin" },
+  { "email": "senior.counsel1@contoso.com", "name": "Senior Counsel 1", "role": "admin", "manager": "general.counsel@contoso.com" },
+  { "email": "associate1@contoso.com", "name": "Associate 1", "role": "user", "manager": "senior.counsel1@contoso.com" }
+]

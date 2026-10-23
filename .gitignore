@@ -1,0 +1,25 @@
+.env
+.env.local
+.env.production
+directory.json
+*.jsonl
+__pycache__/
+.pytest_cache/
+.venv/
+node_modules/
+dist/
+
+.gmail-token.json
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+token.json
+.pytest_cache/
+.mypy_cache/
+*.py[cod]
+
+# Generated TypeScript files
+tsconfig.tsbuildinfo
+
